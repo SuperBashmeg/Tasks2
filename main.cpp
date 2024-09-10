@@ -69,7 +69,6 @@ int main()
 			cars[carId].print();
 		}
 
-		//change menu
 		cout << "Select parameter to change: " << endl;
 		cout << "1. Number plate" << endl;
 		cout << "2. Brand" << endl;
