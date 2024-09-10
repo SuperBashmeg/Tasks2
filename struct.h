@@ -18,6 +18,7 @@ enum class Color
 struct Car
 {
 private:
+	string numberPlate;
 	string brand;
 	string model;
 	Color color;
@@ -58,18 +59,23 @@ public:
 		this->model = "";
 		this->color = Color::UNDEFINED;
 	}
-	Car(string brand) : Car()
+	Car(string numberPlate) : Car()
+	{
+		this->numberPlate = numberPlate;
+	}
+	Car(string numberPlate, string brand) : Car(numberPlate)
 	{
 		this->brand = brand;
 	}
-	Car(string brand, string model) : Car(brand)
+	Car(string numberPlate, string brand, string model) : Car(numberPlate, brand)
 	{
 		this->model = model;
 	}
-	Car(string brand, string model, Color color) : Car(brand, model)
+	Car(string numberPlate, string brand, string model, Color color) : Car(numberPlate, brand, model)
 	{
 		this->color = color;
 	}
+
 
 	//Setters
 	void setBrand(string brand)
@@ -84,6 +90,10 @@ public:
 	{
 		this->color = color;
 	}
+	void setNumberPlate(string numberPlate)
+	{
+		this->numberPlate = numberPlate;
+	}
 
 	//Getters
 	string getBrand()
@@ -92,19 +102,24 @@ public:
 	}
 	string getModel()
 	{
-		return (this->model.empty()) ? "Undefined model" : this->brand;
+		return (this->model.empty()) ? "Undefined model" : this->model;
 	}
 	Color getColor()
 	{
 		return this->color;
 	}
+	string getNumberPlate()
+	{
+		return (this->numberPlate.empty()) ? "Undefined number plate" : this->numberPlate;
+	}
 
 	//Methods
 	void print()
 	{
-		cout << "Brand: " << this->brand << endl;
-		cout << "Model: " << this->model << endl;
+		cout << "Brand: " << this->getBrand() << endl;
+		cout << "Model: " << this->getModel() << endl;
 		cout << "Color: " << this->printEnum() << endl;
+		cout << "Number plate: " << this->getNumberPlate() << endl;
 	}
 
 };
