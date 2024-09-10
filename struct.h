@@ -1,45 +1,43 @@
 #include "lib.h"
 
-enum class Color
+enum class LivingBeingType
 {
-	RED,
-	GREEN,
-	BLUE,
-	YELLOW,
-	BLACK,
-	WHITE,
-	ORANGE,
-	PURPLE,
-	PINK,
-	BROWN,
+	HUMAN,
+	BIRD,
+	CATTLE,
 	UNDEFINED
 };
 
-struct Example
-{
+template <typename T>
+struct LivingBeing {
 private:
-	int* id;
-	string name;
+	double speed;
+	LivingBeingType type;
+	string Color;
+	T* stat;
+
 
 public:
-	Example()
+	LivingBeing()
 	{
-		this->name = "";
-		this->id = nullptr;
+		this->speed = 0;
+		this->type = LivingBeingType::UNDEFINED;
+		this->Color = "Undefined";
+		this->stat = nullptr;
 	}
-	Example(int id) : Example()
+	LivingBeing(int speed) : LivingBeing()
 	{
-		this->setId(id);
+		this->setSpeed(speed);
 	}
-	Example(int id, string name) : Example(id)
+	LivingBeing(int id, string name) : LivingBeing(id)
 	{
 		this->setName(name);
 	}
 
 	//setters
-	void setName(string name)
+	void setSpeed(double speed)
 	{
-		this->name = name;
+		this->speed = speed;
 	}
 	void setId(int id)
 	{
@@ -64,7 +62,7 @@ public:
 	}
 
 	//destructor
-	~Example()
+	~LivingBeing()
 	{
 		delete this->id;
 	}
