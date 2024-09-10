@@ -15,111 +15,59 @@ enum class Color
 	UNDEFINED
 };
 
-struct Car
+struct Example
 {
 private:
-	string numberPlate;
-	string brand;
-	string model;
-	Color color;
-
-	string printEnum()
-	{
-		switch (this->color)
-		{
-		case Color::RED:
-			return "Red";
-		case Color::GREEN:
-			return "Green";
-		case Color::BLUE:
-			return "Blue";
-		case Color::YELLOW:
-			return "Yellow";
-		case Color::BLACK:
-			return "Black";
-		case Color::WHITE:
-			return "White";
-		case Color::ORANGE:
-			return "Orange";
-		case Color::PURPLE:
-			return "Purple";
-		case Color::PINK:
-			return "Pink";
-		case Color::BROWN:
-			return "Brown";
-		default:
-			return "Undefined";
-		}
-	}
+	int* id;
+	string name;
 
 public:
-	Car()
+	Example()
 	{
-		this->brand = "";
-		this->model = "";
-		this->color = Color::UNDEFINED;
+		this->name = "";
+		this->id = nullptr;
 	}
-	Car(string numberPlate) : Car()
+	Example(int id) : Example()
 	{
-		this->numberPlate = numberPlate;
+		this->setId(id);
 	}
-	Car(string numberPlate, string brand) : Car(numberPlate)
+	Example(int id, string name) : Example(id)
 	{
-		this->brand = brand;
-	}
-	Car(string numberPlate, string brand, string model) : Car(numberPlate, brand)
-	{
-		this->model = model;
-	}
-	Car(string numberPlate, string brand, string model, Color color) : Car(numberPlate, brand, model)
-	{
-		this->color = color;
+		this->setName(name);
 	}
 
-
-	//Setters
-	void setBrand(string brand)
+	//setters
+	void setName(string name)
 	{
-		this->brand = brand;
+		this->name = name;
 	}
-	void setModel(string model)
+	void setId(int id)
 	{
-		this->model = model;
-	}
-	void setColor(Color color)
-	{
-		this->color = color;
-	}
-	void setNumberPlate(string numberPlate)
-	{
-		this->numberPlate = numberPlate;
+		this->id = (this->id == nullptr) ? new int(id) : &id;
 	}
 
-	//Getters
-	string getBrand()
+	//getters
+	string getName()
 	{
-		return (this->brand.empty()) ? "Undefined brand" : this->brand;
+		return this->name;
 	}
-	string getModel()
+	int getId()
 	{
-		return (this->model.empty()) ? "Undefined model" : this->model;
-	}
-	Color getColor()
-	{
-		return this->color;
-	}
-	string getNumberPlate()
-	{
-		return (this->numberPlate.empty()) ? "Undefined number plate" : this->numberPlate;
+		return *this->id;
 	}
 
-	//Methods
+	//methods
 	void print()
 	{
-		cout << "Brand: " << this->getBrand() << endl;
-		cout << "Model: " << this->getModel() << endl;
-		cout << "Color: " << this->printEnum() << endl;
-		cout << "Number plate: " << this->getNumberPlate() << endl;
+		cout << "Name: " << this->name << endl;
+		cout << "Id: " << *this->id << endl;
 	}
+
+	//destructor
+	~Example()
+	{
+		delete this->id;
+	}
+
 
 };
