@@ -20,15 +20,12 @@ public:
 		_denominator = denominator;
 	}
 
-	//setters
 	void setNumerator(int numerator) { _numerator = numerator; }
 	void setDenominator(int denominator) { _denominator = denominator; }
 
-	//getters
 	int getNumerator() { return _numerator; }
 	int getDenominator() { return _denominator; }
 
-	//methods
 	void reduce() {
 		int gcd = 1;
 		int smaller = _numerator < _denominator ? _numerator : _denominator;
