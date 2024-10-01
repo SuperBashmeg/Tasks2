@@ -1,71 +1,89 @@
 #include "lib.h"
 
-class Point {
-	int _x, _y, _z, _id;
+class Circledw
+{
+protected:
+	int diameter;
 public:
-	Point() {
-		_id = 0;
-		_x = 0;
-		_y = 0;
-		_z = 0;
-	}
-	Point(int id) : Point()
+	Circledw()
 	{
-		_id = id;
+		cout << "Circle constructor" << endl;
+		diameter = 2;
 	}
-	Point(int id, int x) : Point(id)
+	Circledw(int value)
 	{
-		_x = x;
-	}
-	Point(int id, int x, int y) : Point(id, x)
-	{
-		_y = y;
-	}
-	Point(int id, int x, int y, int z) : Point(id, x, y)
-	{
-		_z = z;
+		cout << "Circle constructor with value" << endl;
+		this->diameter = value;
 	}
 
-	void setId(int id) {
-		_id = id;
-	}
-	void setX(int x) {
-		_x = x;
-	}
-	void setY(int y) {
-		_y = y;
-	}
-	void setZ(int z) {
-		_z = z;
+	virtual void get_value()
+	{
+		cout << "Size from Circle: " << diameter << endl;
 	}
 
-	int getId() {
-		return _id;
-	}
-	int getX() {
-		return _x;
-	}
-	int getY() {
-		return _y;
-	}
-	int getZ() {
-		return _z;
-	}
-
-	void print() {
-		cout << "Point - " << _id << ", X: " << _x << ", Y: " << _y << ", Z: " << _z << endl;
+	virtual ~Circledw()
+	{
+		cout << "Circle destructor" << endl;
 	}
 };
 
-int main()
+
+class Squaredw
 {
-	Point p1(0, 10);
-	Point p2(1, 20, 30);
-	Point p3(2, 40, 50, 60);
-	p1.print();
-	p2.print();
-	p3.print();
+protected:
+	int size;
+public:
+	Squaredw()
+	{
+		size = 1;
+		cout << "Square constructor" << endl;
+	}
+	Squaredw(int size)
+	{
+		this->size = size;
+		cout << "Square constructor with value" << endl;
+	}
+	virtual void get_value()
+	{
+		cout << "Size from Square: " << size << endl;
+	}
+	virtual ~Squaredw()
+	{
+		cout << "Square destructor" << endl;
+	}
+};
+
+class CircleInSquaredw : public Circledw, public Squaredw
+{
+public:
+	CircleInSquaredw()
+	{
+		cout << "CircleInSquare constructor" << endl;
+	}
+	CircleInSquaredw(int value) : Circledw(value), Squaredw(value)
+	{
+		cout << "Child constructor with value" << endl;
+	}
+	void get_value() override
+	{
+		cout << "Diametr from CircleInSquare: " << diameter << endl;
+		cout << "Size from CircleInSquare: " << size << endl;
+
+	}
+	virtual ~CircleInSquaredw()
+	{
+		cout << "Child destructor" << endl;
+	}
+};
 
 
+int main() {
+	Circledw Circle = Circledw(5);
+	Squaredw Square = Squaredw(10);
+	CircleInSquaredw CircleInSquare = CircleInSquaredw(15);
+	Circle.get_value();
+	Square.get_value();
+	CircleInSquare.get_value();
 	return 0;
+
 }
