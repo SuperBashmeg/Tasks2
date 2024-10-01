@@ -53,6 +53,7 @@ public:
 	}
 };
 
+
 class CircleInSquaredw : public Circledw, public Squaredw
 {
 public:
@@ -78,12 +79,13 @@ public:
 
 
 int main() {
-	Circledw Circle = Circledw(5);
-	Squaredw Square = Squaredw(10);
-	CircleInSquaredw CircleInSquare = CircleInSquaredw(15);
-	Circle.get_value();
-	Square.get_value();
-	CircleInSquare.get_value();
-	return 0;
-
+	Circledw* circle = new Circledw(5);
+	Squaredw* square = new Squaredw(10);
+	CircleInSquaredw* circleInSquare = new CircleInSquaredw(15);
+	circle->get_value();
+	square->get_value();
+	circleInSquare->get_value();
+	delete circle;
+	delete square;
+	delete circleInSquare;
 }
