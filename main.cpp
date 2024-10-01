@@ -84,6 +84,7 @@ int main() {
 	Circle.get_value();
 	Square.get_value();
 	CircleInSquare.get_value();
+
 	return 0;
 
 }
