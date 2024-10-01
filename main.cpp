@@ -1,89 +1,176 @@
 #include "lib.h"
 
-class Circledw
+class Engine
 {
 protected:
-	int diameter;
+	int power;
+	int maxSpeed;
+	int weight;
 public:
-	Circledw()
+	Engine()
 	{
-		cout << "Circle constructor" << endl;
-		diameter = 2;
+		power = 0;
+		maxSpeed = 0;
+		weight = 0;
+		cout << "Engine constructor" << endl;
 	}
-	Circledw(int value)
+	Engine(int power, int maxSpeed, int weight)
 	{
-		cout << "Circle constructor with value" << endl;
-		this->diameter = value;
+		this->power = power;
+		this->maxSpeed = maxSpeed;
+		this->weight = weight;
+		cout << "Engine constructor with value" << endl;
 	}
 
 	virtual void get_value()
 	{
-		cout << "Size from Circle: " << diameter << endl;
+		cout << "Power of engine from Engine: " << power << " ; MaxSpeed of the engine from Engine: " << maxSpeed << "Weight of the engine from the Engine: " << weight << endl;
 	}
 
-	virtual ~Circledw()
+	virtual ~Engine()
 	{
-		cout << "Circle destructor" << endl;
+		cout << "Engine destructor" << endl;
 	}
 };
 
 
-class Squaredw
+class Wheel
 {
 protected:
-	int size;
+	int radius;
 public:
-	Squaredw()
+	Wheel()
 	{
-		size = 1;
-		cout << "Square constructor" << endl;
+		radius = 1;
+		cout << "Wheel constructor" << endl;
 	}
-	Squaredw(int size)
+	Wheel(int radius)
 	{
-		this->size = size;
-		cout << "Square constructor with value" << endl;
+		this->radius = radius;
+		cout << "Wheel constructor with radius" << endl;
 	}
 	virtual void get_value()
 	{
-		cout << "Size from Square: " << size << endl;
+		cout << "radius from Wheel: " << radius << endl;
 	}
-	virtual ~Squaredw()
+	virtual ~Wheel()
 	{
-		cout << "Square destructor" << endl;
+		cout << "Wheel destructor" << endl;
 	}
 };
 
-class CircleInSquaredw : public Circledw, public Squaredw
+class Door
 {
+protected:
+	int height;
+	int width;
 public:
-	CircleInSquaredw()
+	Door()
+	{
+		height = 2;
+		width = 1;
+		cout << "Door constructor" << endl;
+	}
+	Door(int height, int width)
+	{
+		this->height = height;
+		this->width = width;
+		cout << "Door constructor with height and width" << endl;
+	}
+
+	virtual void get_value()
+	{
+		cout << "dimensions from Door: height = " << height << "; width = " << width << endl;
+	}
+	virtual ~Door()
+	{
+		cout << "Door destructor" << endl;
+	}
+};
+
+class Seat
+{
+protected:
+	string material;
+public:
+	Seat()
+	{
+		material = "leather";
+		cout << "Seat constructor" << endl;
+	}
+	Seat(string material)
+	{
+		this->material = material;
+		cout << "Seat constructor with material" << endl;
+	}
+
+	virtual void get_value()
+	{
+		cout << "Material of the seat" << material << endl;
+	}
+	virtual ~Seat()
+	{
+		cout << "Seat destructor" << endl;
+	}
+};
+
+
+class Car : public Engine, public Wheel, public Door, public Seat
+{
+protected:
+	int amountOfWheels;
+	int amountOfDoors;
+	int amountOfSeats;
+public:
+	Car()
 	{
 		cout << "CircleInSquare constructor" << endl;
+		amountOfWheels = 4;
+		amountOfDoors = 4;
+		amountOfSeats = 5;
+
 	}
-	CircleInSquaredw(int value) : Circledw(value), Squaredw(value)
+	Car(int power, int maxSpeed, int weight, int radius, int height, int width, string material, int amountOfWheels, int amountOfDoors, int amountOfSeats) : Engine(power, maxSpeed, weight), Wheel(radius), Door(height, width), Seat(material)
 	{
-		cout << "Child constructor with value" << endl;
+		cout << "CircleInSquare constructor with value" << endl;
+		this->amountOfWheels = amountOfWheels;
+		this->amountOfDoors = amountOfDoors;
+		this->amountOfSeats = amountOfSeats;
 	}
 	void get_value() override
 	{
-		cout << "Diametr from CircleInSquare: " << diameter << endl;
-		cout << "Size from CircleInSquare: " << size << endl;
+		cout << "Amount of wheels: " << amountOfWheels << "; Amount of doors: " << amountOfDoors << "; Amount of seats: " << amountOfSeats << endl;
+		cout << "Power of engine from Car: " << power << " ; MaxSpeed of the engine from Car: " << maxSpeed << "Weight of the engine from the Car: " << weight << endl;
+		cout << "radius from Car: " << radius << endl;
+		cout << "dimensions from Car: height = " << height << "; width = " << width << endl;
+		cout << "Material of the seat from Car: " << material << endl;
 
 	}
-	virtual ~CircleInSquaredw()
+	virtual ~Car()
 	{
-		cout << "Child destructor" << endl;
+		cout << "Car destructor" << endl;
 	}
 };
 
 
 int main() {
-	Circledw Circle = Circledw(5);
-	Squaredw Square = Squaredw(10);
-	CircleInSquaredw CircleInSquare = CircleInSquaredw(15);
-	Circle.get_value();
-	Square.get_value();
-	CircleInSquare.get_value();
+	Engine engine(100, 200, 300);
+	Wheel wheel(10);
+	Door door(5, 3);
+	Seat seat("leather");
+	Car car(200, 300, 400, 15, 7, 5, "silk", 10, 10, 10);
+	cout << endl;
+	cout << endl;
+	engine.get_value();
+	cout << endl;
+	wheel.get_value();
+	cout << endl;
+	door.get_value();
+	cout << endl;
+	seat.get_value();
+	cout << endl;
+	car.get_value();
+	cout << endl;
 	return 0;
 
 }
