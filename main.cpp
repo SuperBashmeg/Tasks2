@@ -172,5 +172,4 @@ int main() {
 	car.get_value();
 	cout << endl;
 	return 0;
-
 }
